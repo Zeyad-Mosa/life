@@ -10,152 +10,96 @@
             font-family: 'Poppins', sans-serif;
             margin: 0;
             padding: 0;
-            background: #f7f8fa;
+            background: #f4f7f6;
             color: #2c3e50;
-        }
-
-        /* Navigation Bar */
-        .navbar {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 15px ;
-      position: fixed;
-      width: 100%;
-      background: #ffffff;
-      z-index: 1000;
-      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-    }
-        .navbar .logo {
-            font-size: 1.8rem;
-            font-weight: bold;
-            color: #2c3e50;
-        }
-        .navbar .menu {
-            list-style: none;
             display: flex;
-            gap: 25px;
-            margin: 0;
-        }
-        .navbar .menu li {
-            position: relative;
-        }
-        .navbar .menu a {
-            text-decoration: none;
-            color: #2c3e50;
-            font-weight: 500;
-            padding: 10px 20px;
-            border-radius: 5px;
-            transition: all 0.3s ease;
-        }
-        .navbar .menu a:hover {
-            background: #e9ecef;
-            color: #495057;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-        }
-
-        /* Home Section */
-        .home {
-            height: 100vh;
-            display: flex;
-            flex-direction: column;
             align-items: center;
             justify-content: center;
-            text-align: center;
-            background: linear-gradient(120deg, #dfe4ea, #f1f2f6);
-            color: #2c3e50;
-        }
-        .home h1 {
-            font-size: 4rem;
-            margin-bottom: 20px;
-            font-weight: bold;
-            text-transform: uppercase;
-        }
-        .home h1 span {
-            color: #576574;
-        }
-        .home p {
-            font-size: 1.8rem;
-            color: #7f8c8d;
+            height: 100vh;
+            overflow: hidden;
         }
 
+        /* Main Container */
         .container {
             text-align: center;
-            padding: 20px;
+            width: 80%;
+            max-width: 600px;
+            background: #ffffff;
+            padding: 30px;
             border-radius: 15px;
-            background: rgba(255, 255, 255, 0.8);
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-            margin-top: 100px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
         }
 
         h1 {
-            font-size: 2.5rem;
+            font-size: 2rem;
             margin-bottom: 20px;
             font-weight: 700;
+            color: #2c3e50;
         }
 
         .countdown {
-            font-size: 1rem;
+            font-size: 1.2rem;
             margin: 15px 0;
             padding: 20px;
             border-radius: 10px;
-            background: #ffffff;
-            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
-            color: #444;
+            background: linear-gradient(135deg, #74ebd5, #9face6);
+            box-shadow: 0 3px 15px rgba(0, 0, 0, 0.1);
+            color: #ffffff;
+            transition: all 0.3s ease;
+        }
+
+        .countdown:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 25px rgba(0, 0, 0, 0.15);
         }
 
         .time {
             font-weight: 700;
             font-size: 1.5rem;
-            color: #000;
+            color: #34495e;
         }
 
         .timer-title {
             font-weight: 400;
             font-size: 1.2rem;
-            margin-bottom: 5px;
+            margin-bottom: 10px;
         }
 
-        @media (max-width: 600px) {
+        @media (max-width: 768px) {
             h1 {
-                font-size: 2rem;
+                font-size: 1.8rem;
             }
 
             .countdown {
-                font-size: 0.9rem;
+                font-size: 1rem;
+                padding: 15px;
+            }
+
+            .time {
+                font-size: 1.3rem;
             }
         }
     </style>
 </head>
 <body>
-    <div class="navbar">
-        <div class="logo">Countdown</div>
-        <ul class="menu">
-            <li><a href="#timer1">February 8</a></li>
-            <li><a href="#timer2">March 1</a></li>
-            <li><a href="#timer3">March 29</a></li>
-            <li><a href="#timer4">June 15</a></li>
-        </ul>
-    </div>
-
-    <div class="home">
-        <h1>Welcome to <span>Countdown Timers</span></h1>
-        <p>Track the time remaining for important dates</p>
-    </div>
 
     <div class="container">
         <h1>Countdown Timers</h1>
         <div id="timer1" class="countdown">
-            <div class="timer-title">Countdown to February 8</div>
+            <div class="timer-title">Until February 8</div>
+            <div class="time" id="time1"></div>
         </div>
         <div id="timer2" class="countdown">
-            <div class="timer-title">Countdown to March 1</div>
+            <div class="timer-title">Until March 1</div>
+            <div class="time" id="time2"></div>
         </div>
         <div id="timer3" class="countdown">
-            <div class="timer-title">Countdown to March 29</div>
+            <div class="timer-title">Until March 29</div>
+            <div class="time" id="time3"></div>
         </div>
         <div id="timer4" class="countdown">
-            <div class="timer-title">Countdown to June 15</div>
+            <div class="timer-title">Until June 15</div>
+            <div class="time" id="time4"></div>
         </div>
     </div>
 
@@ -169,7 +113,7 @@
                 const distance = target - now;
 
                 if (distance < 0) {
-                    element.innerHTML += `<span class="time">Time's up!</span>`;
+                    element.innerHTML = '<span class="time">Time\'s up!</span>';
                     clearInterval(interval);
                     return;
                 }
@@ -186,10 +130,10 @@
             const interval = setInterval(update, 1000);
         }
 
-        countdown('2025-02-08T00:00:00', 'timer1');
-        countdown('2025-03-01T00:00:00', 'timer2');
-        countdown('2025-03-29T00:00:00', 'timer3');
-        countdown('2025-06-15T00:00:00', 'timer4');
+        countdown('2025-02-08T00:00:00', 'time1');
+        countdown('2025-03-01T00:00:00', 'time2');
+        countdown('2025-03-29T00:00:00', 'time3');
+        countdown('2025-06-15T00:00:00', 'time4');
     </script>
 </body>
 </html>
