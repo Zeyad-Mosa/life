@@ -1,140 +1,124 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Countdown Timers</title>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;700&display=swap" rel="stylesheet">
-    <link rel="icon" href="https://raw.githubusercontent.com/Zeyad-Mosa/life/c7c6eaaf003b8b99f7d60d7e2b1ff9883e9157a7/countdown.ico" type="image/x-icon">
-    <style>
-        body {
-            font-family: 'Poppins', sans-serif;
-            margin: 0;
-            padding: 0;
-            background: #f4f7f6;
-            color: #2c3e50;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            height: 100vh;
-            overflow: hidden;
-        }
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Countdown Timer</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;700&display=swap" rel="stylesheet">
+  <link rel="icon" href="https://raw.githubusercontent.com/Zeyad-Mosa/life/c7c6eaaf003b8b99f7d60d7e2b1ff9883e9157a7/countdown.ico" type="image/x-icon">
+  <style>
+    body {
+      font-family: 'Poppins', sans-serif;
+      margin: 0;
+      padding: 0;
+      background: #f4f7f6;
+      color: #2c3e50;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      overflow: hidden;
+    }
 
-        /* Main Container */
-        .container {
-            text-align: center;
-            width: 80%;
-            max-width: 600px;
-            background: #ffffff;
-            padding: 30px;
-            border-radius: 15px;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
-        }
+    .container {
+      text-align: center;
+      width: 80%;
+      max-width: 600px;
+      background: #ffffff;
+      padding: 30px;
+      border-radius: 15px;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    }
 
-        h1 {
-            font-size: 2rem;
-            margin-bottom: 20px;
-            font-weight: 700;
-            color: #2c3e50;
-        }
+    h1 {
+      font-size: 2rem;
+      margin-bottom: 20px;
+      font-weight: 700;
+      color: #2c3e50;
+    }
 
-        .countdown {
-            font-size: 1.2rem;
-            margin: 15px 0;
-            padding: 20px;
-            border-radius: 10px;
-            background: linear-gradient(135deg, #74ebd5, #9face6);
-            box-shadow: 0 3px 15px rgba(0, 0, 0, 0.1);
-            color: #ffffff;
-            transition: all 0.3s ease;
-        }
+    .countdown {
+      font-size: 1.2rem;
+      margin: 15px 0;
+      padding: 20px;
+      border-radius: 10px;
+      background: linear-gradient(135deg, #74ebd5, #9face6);
+      box-shadow: 0 3px 15px rgba(0, 0, 0, 0.1);
+      color: #ffffff;
+      transition: all 0.3s ease;
+    }
 
-        .countdown:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 6px 25px rgba(0, 0, 0, 0.15);
-        }
+    .countdown:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 6px 25px rgba(0, 0, 0, 0.15);
+    }
 
-        .time {
-            font-weight: 700;
-            font-size: 1.5rem;
-            color: #34495e;
-        }
+    .time {
+      font-weight: 700;
+      font-size: 1.5rem;
+      color: #34495e;
+    }
 
-        .timer-title {
-            font-weight: 400;
-            font-size: 1.2rem;
-            margin-bottom: 10px;
-        }
+    .timer-title {
+      font-weight: 400;
+      font-size: 1.2rem;
+      margin-bottom: 10px;
+    }
 
-        @media (max-width: 768px) {
-            h1 {
-                font-size: 1.8rem;
-            }
+    @media (max-width: 768px) {
+      h1 {
+        font-size: 1.8rem;
+      }
 
-            .countdown {
-                font-size: 1rem;
-                padding: 15px;
-            }
+      .countdown {
+        font-size: 1rem;
+        padding: 15px;
+      }
 
-            .time {
-                font-size: 1.3rem;
-            }
-        }
-    </style>
+      .time {
+        font-size: 1.3rem;
+      }
+    }
+  </style>
 </head>
 <body>
-
-    <div class="container">
-        <h1>Countdown Timers</h1>
-        <div id="timer1" class="countdown">
-            <div class="timer-title">Until February 9</div>
-            <div class="time" id="time1"></div>
-        </div>
-        <div id="timer2" class="countdown">
-            <div class="timer-title">Until March 1</div>
-            <div class="time" id="time2"></div>
-        </div>
-        <div id="timer3" class="countdown">
-            <div class="timer-title">Until March 29</div>
-            <div class="time" id="time3"></div>
-        </div>
-        <div id="timer4" class="countdown">
-            <div class="timer-title">Until June 15</div>
-            <div class="time" id="time4"></div>
-        </div>
+  <div class="container">
+    <h1>Countdown Timer</h1>
+    <div id="timerFinal" class="countdown">
+      <div class="timer-title">Until June 14, 2025</div>
+      <div class="time" id="finalTime"></div>
     </div>
+  </div>
 
-    <script>
-        function countdown(targetDate, elementId) {
-            const target = new Date(targetDate).getTime();
-            const element = document.getElementById(elementId);
+  <script>
+    function countdown(targetDate, elementId) {
+      const target = new Date(targetDate).getTime();
+      const element = document.getElementById(elementId);
 
-            function update() {
-                const now = new Date().getTime();
-                const distance = target - now;
+      function update() {
+        const now = new Date().getTime();
+        const distance = target - now;
 
-                if (distance < 0) {
-                    element.innerHTML = '<span class="time">Time\'s up!</span>';
-                    clearInterval(interval);
-                    return;
-                }
-
-                const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-                const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-                const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-                const seconds = Math.floor((distance % (1000 * 60)) / 1000);
-
-                element.innerHTML = `<span class="time">${days}d ${hours}h ${minutes}m ${seconds}s</span>`;
-            }
-
-            update();
-            const interval = setInterval(update, 1000);
+        if (distance < 0) {
+          element.innerHTML = '<span class="time">Time\'s up!</span>';
+          clearInterval(interval);
+          return;
         }
 
-        countdown('2025-02-09T00:00:00', 'time1');
-        countdown('2025-03-01T00:00:00', 'time2');
-        countdown('2025-03-29T00:00:00', 'time3');
-        countdown('2025-06-15T00:00:00', 'time4');
-    </script>
+        const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+        const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+        const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+        element.innerHTML = `<span class="time">${days}d ${hours}h ${minutes}m ${seconds}s</span>`;
+      }
+
+      update();
+      const interval = setInterval(update, 1000);
+    }
+
+    // Countdown to June 14, 2025 at 11:59:59 PM
+    countdown('2025-06-14T23:59:59', 'finalTime');
+  </script>
 </body>
 </html>
