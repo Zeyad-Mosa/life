@@ -70,8 +70,8 @@
           const now = new Date().getTime();
           const distance = target - now;
 
-          if (distance < 0) {
-            element.innerHTML = "Time's up!";
+          if (distance <= 0) {
+            element.innerHTML = "🎉 It's June 14, 2025!";
             clearInterval(interval);
             return;
           }
@@ -88,7 +88,7 @@
         const interval = setInterval(update, 1000);
       }
 
-      countdown('2025-06-14T23:59:59', 'countdownTimer');
+      countdown('2025-06-14T00:00:00', 'countdownTimer');
     };
   </script>
 </body>
