@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Countdown Timer</title>
+  <title>Countdown to June 14, 2025</title>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;700&display=swap" rel="stylesheet">
   <link rel="icon" href="https://raw.githubusercontent.com/Zeyad-Mosa/life/c7c6eaaf003b8b99f7d60d7e2b1ff9883e9157a7/countdown.ico" type="image/x-icon">
   <style>
@@ -17,7 +17,6 @@
       align-items: center;
       justify-content: center;
       height: 100vh;
-      overflow: hidden;
     }
 
     .container {
@@ -34,91 +33,63 @@
       font-size: 2rem;
       margin-bottom: 20px;
       font-weight: 700;
-      color: #2c3e50;
     }
 
     .countdown {
       font-size: 1.2rem;
-      margin: 15px 0;
       padding: 20px;
       border-radius: 10px;
       background: linear-gradient(135deg, #74ebd5, #9face6);
+      color: white;
       box-shadow: 0 3px 15px rgba(0, 0, 0, 0.1);
-      color: #ffffff;
-      transition: all 0.3s ease;
-    }
-
-    .countdown:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 6px 25px rgba(0, 0, 0, 0.15);
     }
 
     .time {
-      font-weight: 700;
       font-size: 1.5rem;
+      font-weight: bold;
       color: #34495e;
-    }
-
-    .timer-title {
-      font-weight: 400;
-      font-size: 1.2rem;
-      margin-bottom: 10px;
-    }
-
-    @media (max-width: 768px) {
-      h1 {
-        font-size: 1.8rem;
-      }
-
-      .countdown {
-        font-size: 1rem;
-        padding: 15px;
-      }
-
-      .time {
-        font-size: 1.3rem;
-      }
     }
   </style>
 </head>
 <body>
   <div class="container">
-    <h1>Countdown Timer</h1>
-    <div id="timerFinal" class="countdown">
-      <div class="timer-title">Until June 14, 2025</div>
-      <div class="time" id="finalTime"></div>
+    <h1>Countdown to June 14, 2025</h1>
+    <div class="countdown">
+      <div id="countdownTitle">Time Remaining:</div>
+      <div class="time" id="countdownTimer"></div>
     </div>
   </div>
 
   <script>
-    function countdown(targetDate, elementId) {
-      const target = new Date(targetDate).getTime();
-      const element = document.getElementById(elementId);
+    window.onload = function () {
+      function countdown(targetDate, elementId) {
+        const target = new Date(targetDate).getTime();
+        const element = document.getElementById(elementId);
 
-      function update() {
-        const now = new Date().getTime();
-        const distance = target - now;
+        function update() {
+          const now = new Date().getTime();
+          const distance = target - now;
 
-        if (distance < 0) {
-          element.innerHTML = '<span class="time">Time\'s up!</span>';
-          clearInterval(interval);
-          return;
+          if (distance < 0) {
+            element.innerHTML = "Time's up!";
+            clearInterval(interval);
+            return;
+          }
+
+          const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+          const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+          const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+          const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+          element.innerHTML = `${days}d ${hours}h ${minutes}m ${seconds}s`;
         }
 
-        const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-        const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-        const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-        const seconds = Math.floor((distance % (1000 * 60)) / 1000);
-
-        element.innerHTML = `<span class="time">${days}d ${hours}h ${minutes}m ${seconds}s</span>`;
+        update();
+        const interval = setInterval(update, 1000);
       }
 
-      update();
-      const interval = setInterval(update, 1000);
-    }
-
-    // Countdown to June 14, 2025 at 11:59:59 PM
-    countdown('2025-06-14T23:59:59', 'finalTime');
+      countdown('2025-06-14T23:59:59', 'countdownTimer');
+    };
   </script>
 </body>
 </html>
